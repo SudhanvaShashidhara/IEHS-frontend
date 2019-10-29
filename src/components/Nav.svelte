@@ -2,7 +2,6 @@
   import Overlay from "./Overlay.svelte";
   import { fade } from "svelte/transition";
   export let segment;
-
   let showOverlayAndSideNav = false;
   function toggleOverlay() {
     showOverlayAndSideNav = !showOverlayAndSideNav;
@@ -16,7 +15,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 0.4rem 0.6rem;
-    background-color: rgb(148, 43, 43);
+    background-color: var(--main-color);
     height: 56px;
   }
   .sidebar-button {
@@ -24,34 +23,41 @@
     flex-direction: column;
     outline: none;
     border: none;
-    background-color: rgb(148, 43, 43);
+    background-color: var(--main-color);
+  }
+  .sidebar-button:hover {
+    cursor: pointer;
   }
   .logo {
     font-size: 1.8rem;
+    color: #fff;
   }
   .main-color {
     color: var(--main-color);
   }
   .sidebar-button span {
-    background-color: black;
+    background-color: #fff;
     height: 0.4rem;
     width: 2.5rem;
     margin: 0.2rem 0;
   }
+  .sidebar-button span:active,
+  .sidebar-button span:focus {
+    border: 1px solid teal;
+  }
   .mobile-nav {
     position: fixed;
-    background-color: rgba(148, 43, 43, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--main-color-variant);
     height: 100%;
-    width: 60%;
+    width: 70%;
     top: 0;
     right: 0;
     z-index: 25;
-    transform: translateX(100%);
-    transition: all 3s ease-in-out;
   }
-  .open--nav {
-    transform: translateX(0%);
-  }
+
   .desktop-nav {
     display: none;
   }
@@ -60,7 +66,22 @@
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
+    height: 80%;
+  }
+  ul a {
+    font-weight: 900;
+    color: #fff;
     height: 100%;
+    padding: 0.3rem;
+    border-bottom: 0 solid rgb(114, 67, 92);
+    transition: all 0.3s ease-in-out;
+  }
+  ul a.active {
+    color: #ffcb00;
+  }
+  ul a:hover,
+  ul a:focus {
+    border-bottom: 0.1rem solid var(--main-secondary-color);
   }
 
   @media only screen and (min-width: 1024px) {
@@ -69,7 +90,11 @@
     }
     .desktop-nav {
       display: block;
+      height: 100%;
+      display: flex;
+      background-color: var(--main-color-variant);
     }
+
     .nav__list {
       display: flex;
       flex-direction: row;
@@ -96,19 +121,25 @@
   <nav class="desktop-nav">
     <ul class="nav__list">
       <li>
-        <a href=".">Home</a>
+        <a class={!segment ? 'active' : ''} href=".">HOME</a>
       </li>
       <li>
-        <a href="about">About</a>
+        <a class={segment === 'about' ? 'active' : ''} href="about">ABOUT</a>
       </li>
       <li>
-        <a href="gallery">Gallery</a>
+        <a class={segment === 'gallery' ? 'active' : ''} href="gallery">
+          GALLERY
+        </a>
       </li>
       <li>
-        <a href="mission">Mission</a>
+        <a class={segment === 'mission' ? 'active' : ''} href="mission">
+          MISSION
+        </a>
       </li>
       <li>
-        <a href="contact">Contact</a>
+        <a class={segment === 'contact' ? 'active' : ''} href="contact">
+          CONTACT
+        </a>
       </li>
 
     </ul>
@@ -117,19 +148,41 @@
     <nav class="mobile-nav open--nav" transition:fade={{ duration: 300 }}>
       <ul class="nav__list">
         <li>
-          <a href="." on:click={toggleOverlay}>Home</a>
+          <a class={!segment ? 'active' : ''} href="." on:click={toggleOverlay}>
+            HOME
+          </a>
         </li>
         <li>
-          <a href="about" on:click={toggleOverlay}>About</a>
+          <a
+            class={segment === 'about' ? 'active' : ''}
+            href="about"
+            on:click={toggleOverlay}>
+            ABOUT
+          </a>
         </li>
         <li>
-          <a href="gallery" on:click={toggleOverlay}>Gallery</a>
+          <a
+            class={segment === 'gallery' ? 'active' : ''}
+            href="gallery"
+            on:click={toggleOverlay}>
+            GALLERY
+          </a>
         </li>
         <li>
-          <a href="mission" on:click={toggleOverlay}>Mission</a>
+          <a
+            class={segment === 'mission' ? 'active' : ''}
+            href="mission"
+            on:click={toggleOverlay}>
+            MISSION
+          </a>
         </li>
         <li>
-          <a href="contact" on:click={toggleOverlay}>Contact</a>
+          <a
+            class={segment === 'contact' ? 'active' : ''}
+            href="contact"
+            on:click={toggleOverlay}>
+            CONTACT
+          </a>
         </li>
 
       </ul>

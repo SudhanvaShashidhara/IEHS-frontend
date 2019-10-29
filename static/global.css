@@ -2,6 +2,8 @@
 
 :root {
   --main-color: rgb(148, 43, 43);
+  --main-color-variant: rgba(166, 33, 33, 0.9);
+  --main-secondary-color: #ffcb00;
 }
 
 * {
