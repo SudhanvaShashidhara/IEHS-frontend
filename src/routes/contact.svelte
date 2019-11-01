@@ -1,20 +1,10 @@
+<script>
+  import IoMdPerson from "svelte-icons/io/IoMdPerson.svelte";
+</script>
+
 <style>
-  h1 {
-    text-align: center;
-    margin: 0 auto;
-  }
-
-  h1 {
-    font-size: 2.8em;
-    text-transform: uppercase;
-    font-weight: 700;
-    margin: 0 0 0.5em 0;
-  }
-
-  @media (min-width: 480px) {
-    h1 {
-      font-size: 4em;
-    }
+  #contact-section {
+    margin: 2rem 1rem;
   }
 </style>
 
@@ -22,4 +12,22 @@
   <title>Contact Page</title>
 </svelte:head>
 
-<h1>Contact Page</h1>
+<section id="contact-section">
+  <form class="contact-form">
+    <div class="form-control">
+      <label for="name">Name</label>
+      <input type="text" id="name" />
+    </div>
+
+    <div class="form-control">
+      <label for="email">E Mail</label>
+      <input type="email" id="email" />
+    </div>
+
+    <div class="form-control">
+      <label for="message">Message</label>
+      <textarea id="message" />
+    </div>
+  </form>
+  <div class="contact-info" />
+</section>
