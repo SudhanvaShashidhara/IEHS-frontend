@@ -14,7 +14,10 @@
   }
   section {
     width: 90%;
-    margin: 1rem auto;
+    margin: 1rem auto 0;
+  }
+  .link-section {
+    margin-bottom: 1rem;
   }
   h3 {
     text-align: center;
@@ -47,7 +50,13 @@
     border: 1px solid rgba(250, 33, 33, 0.9);
     color: var(--main-secondary-color);
   }
+
+  ul li {
+    min-height: 48px;
+  }
+
   ul a {
+    min-height: 48px;
     transition: all 0.3s ease-in-out;
   }
   ul a:hover,
@@ -57,6 +66,7 @@
   .footer-copyright {
     padding: 0.9rem;
     background-color: var(--main-color-variant);
+    color: #fff;
   }
 
   @media only screen and (min-width: 1024px) {
@@ -156,5 +166,5 @@
 </footer>
 
 <div class="footer-copyright">
-  © 2019 Ideal English High School. All rights reserved.
+  © {new Date().getFullYear()} Ideal English High School. All rights reserved.
 </div>

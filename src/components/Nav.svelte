@@ -106,7 +106,10 @@
 </style>
 
 <header>
-  <button on:click={toggleOverlay} class="sidebar-button">
+  <button
+    aria-label="Hamburger Menu"
+    on:click={toggleOverlay}
+    class="sidebar-button">
     <span class="bar-one" />
     <span class="bar-two" />
     <span class="bar-three" />
