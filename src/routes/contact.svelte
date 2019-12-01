@@ -4,7 +4,34 @@
     email = "",
     message = "";
 
-  onMount(() => {});
+  onMount(() => {
+    window.initMap = () => {
+      // The location of IEHS
+      const iehsLocation = { lat: 13.054001, lng: 77.514559 };
+      // The map, centered at Uluru
+      const map = new google.maps.Map(document.getElementById("map-section"), {
+        zoom: 15,
+        center: iehsLocation
+      });
+      // The marker, positioned at IEHS
+      const marker = new google.maps.Marker({
+        position: iehsLocation,
+        map: map
+      });
+    };
+    if (typeof google !== "object") {
+      const mapScript = document.createElement("script");
+      mapScript.src =
+        "https://maps.googleapis.com/maps/api/js?key=AIzaSyAm1A8X28plRsq_RJXKlca-beiv_Qq1pEw&callback=initMap";
+      mapScript.async = true;
+      mapScript.defer = true;
+      document.body.appendChild(mapScript);
+    } else {
+      console.log("Calling initMap");
+      window.initMap();
+    }
+  });
+
   function handleContactFormSubmit(event) {
     event.preventDefault();
     console.log("Form Submitted");
@@ -16,7 +43,7 @@
 
 <style>
   #contact-section {
-    padding: 2rem 0.5rem;
+    /* padding: 2rem 0.5rem; */
     width: 100%;
   }
 
@@ -27,6 +54,19 @@
     margin: 2rem auto;
     display: flex;
     flex-direction: column;
+  }
+
+  .contact-info {
+    margin-bottom: 0;
+  }
+
+  .contact-info {
+    border-bottom: 2px solid var(--main-color-variant);
+    padding-bottom: 2rem;
+  }
+
+  #map-section {
+    height: 45vh;
   }
 
   .contact-form > div {
@@ -140,12 +180,18 @@
     .contact-info {
       border-top: none;
     }
+
+    #map-section {
+      height: 55vh;
+    }
   }
 </style>
 
 <svelte:head>
   <title>Contact Page</title>
 </svelte:head>
+
+<section id="map-section" />
 
 <section id="contact-section">
   <form on:submit={handleContactFormSubmit} class="contact-form">

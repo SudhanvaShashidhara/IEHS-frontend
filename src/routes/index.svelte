@@ -23,3 +23,12 @@
 </svelte:head>
 
 <h1>Home Page</h1>
+<div class="carousel">
+  <button class="carousel__button" />
+  <div class="carousel__track-container">
+    <ul class="carousel__track">
+      li
+    </ul>
+  </div>
+  <button class="carousel__button" />
+</div>

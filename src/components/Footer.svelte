@@ -44,20 +44,18 @@
   .links {
     text-align: center;
   }
-  .active {
-    background-color: var(--main-color-variant);
-    border-radius: 0.3rem;
-    border: 1px solid rgba(250, 33, 33, 0.9);
-    color: var(--main-secondary-color);
-  }
 
   ul li {
     min-height: 48px;
   }
 
+  li.active {
+    color: var(--main-secondary-color);
+  }
+
   ul a {
     min-height: 48px;
-    transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in;
   }
   ul a:hover,
   ul a:focus {
@@ -92,6 +90,7 @@
       flex-direction: column;
       justify-content: space-around;
       height: 70%;
+      margin-top: 2rem;
     }
 
     .links li {
