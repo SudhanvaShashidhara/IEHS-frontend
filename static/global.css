@@ -4,6 +4,7 @@
   --main-color: rgb(148, 43, 43);
   --main-color-variant: rgba(166, 33, 33, 0.9);
   --main-secondary-color: #ffcb00;
+  --main-secondary-variant: rgba(255, 203, 0, 0.35);
 }
 
 * {
@@ -27,4 +28,17 @@ a {
 
 ul {
   list-style: none;
+}
+@media (min-width: 480px) {
+  main {
+    font-size: 1.2rem;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-size: 1.5rem;
+  }
 }
