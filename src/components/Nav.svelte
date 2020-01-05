@@ -126,9 +126,9 @@
       <li>
         <a class={!segment ? 'active' : ''} href=".">HOME</a>
       </li>
-      <li>
+      <!-- <li>
         <a class={segment === 'about' ? 'active' : ''} href="about">ABOUT</a>
-      </li>
+      </li> -->
       <li>
         <a class={segment === 'gallery' ? 'active' : ''} href="gallery">
           GALLERY
@@ -155,14 +155,14 @@
             HOME
           </a>
         </li>
-        <li>
+        <!-- <li>
           <a
             class={segment === 'about' ? 'active' : ''}
             href="about"
             on:click={toggleOverlay}>
             ABOUT
           </a>
-        </li>
+        </li> -->
         <li>
           <a
             class={segment === 'gallery' ? 'active' : ''}

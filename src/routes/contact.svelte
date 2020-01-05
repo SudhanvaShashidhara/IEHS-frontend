@@ -27,7 +27,6 @@
       mapScript.defer = true;
       document.body.appendChild(mapScript);
     } else {
-      console.log("Calling initMap");
       window.initMap();
     }
   });
