@@ -78,7 +78,7 @@
       margin: auto;
     }
     #hero-image {
-      height: 35vh;
+      height: 55vh;
       width: 100%;
     }
 
@@ -87,7 +87,7 @@
     }
 
     .hero-image__title {
-      font-size: 2rem;
+      font-size: 4rem;
     }
 
     #content {

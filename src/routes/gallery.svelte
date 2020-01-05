@@ -94,92 +94,92 @@
 <h1>GALLERY</h1>
 <div class="gallery-image-container">
   <div class="image">
-    <img data-src="./gallery/400.JPG" alt="" />
+    <img data-src="./gallery/400.jpg" alt="" />
   </div>
   <div class="image">
-    <img data-src="./gallery/416.JPG" alt="" />
+    <img data-src="./gallery/416.jpg" alt="" />
   </div>
   <div class="image">
-    <img data-src="./gallery/DSCN9360.JPG" alt="" />
+    <img data-src="./gallery/DSCN9360.jpg" alt="" />
   </div>
   <div class="image">
-    <img data-src="./gallery/IMG_1275.JPG" alt="" />
+    <img data-src="./gallery/IMG_1275.jpg" alt="" />
   </div>
   <div class="image">
-    <img data-src="./gallery/IMG_1282.JPG" alt="" />
+    <img data-src="./gallery/IMG_1282.jpg" alt="" />
   </div>
   <div class="image">
-    <img data-src="./gallery/IMG_1782.JPG" alt="" />
-  </div>
-
-  <div class="image">
-    <img data-src="./gallery/IMG_6875.JPG" alt="" />
-  </div>
-  <div class="image">
-    <img data-src="./gallery/IMG_6879.JPG" alt="" />
-  </div>
-  <div class="image">
-    <img data-src="./gallery/IMG_6888.JPG" alt="" />
-  </div>
-  <div class="image">
-    <img data-src="./gallery/IMG_6892.JPG" alt="" />
-  </div>
-  <div class="image">
-    <img data-src="./gallery/IMG_6895.JPG" alt="" />
-  </div>
-  <div class="image">
-    <img data-src="./gallery/IMG_6902.JPG" alt="" />
+    <img data-src="./gallery/IMG_1782.jpg" alt="" />
   </div>
 
   <div class="image">
-    <img data-src="./gallery/IMG_6905.JPG" alt="" />
+    <img data-src="./gallery/IMG_6875.jpg" alt="" />
   </div>
   <div class="image">
-    <img data-src="./gallery/IMG_6911.JPG" alt="" />
+    <img data-src="./gallery/IMG_6879.jpg" alt="" />
   </div>
   <div class="image">
-    <img data-src="./gallery/IMG_6929.JPG" alt="" />
+    <img data-src="./gallery/IMG_6888.jpg" alt="" />
   </div>
   <div class="image">
-    <img data-src="./gallery/IMG_6945.JPG" alt="" />
+    <img data-src="./gallery/IMG_6892.jpg" alt="" />
   </div>
   <div class="image">
-    <img data-src="./gallery/IMG_6946.JPG" alt="" />
+    <img data-src="./gallery/IMG_6895.jpg" alt="" />
   </div>
   <div class="image">
-    <img data-src="./gallery/IMG_6947.JPG" alt="" />
-  </div>
-
-  <div class="image">
-    <img data-src="./gallery/IMG_6973.JPG" alt="" />
-  </div>
-  <div class="image">
-    <img data-src="./gallery/IMG_6982.JPG" alt="" />
-  </div>
-  <div class="image">
-    <img data-src="./gallery/IMG_6985.JPG" alt="" />
-  </div>
-  <div class="image">
-    <img data-src="./gallery/IMG_7005.JPG" alt="" />
-  </div>
-  <div class="image">
-    <img data-src="./gallery/IMG_7007.JPG" alt="" />
-  </div>
-  <div class="image">
-    <img data-src="./gallery/IMG_7065.JPG" alt="" />
+    <img data-src="./gallery/IMG_6902.jpg" alt="" />
   </div>
 
   <div class="image">
-    <img data-src="./gallery/IMG_7069.JPG" alt="" />
+    <img data-src="./gallery/IMG_6905.jpg" alt="" />
   </div>
   <div class="image">
-    <img data-src="./gallery/IMG_7080.JPG" alt="" />
+    <img data-src="./gallery/IMG_6911.jpg" alt="" />
   </div>
   <div class="image">
-    <img data-src="./gallery/IMG_7151.JPG" alt="" />
+    <img data-src="./gallery/IMG_6929.jpg" alt="" />
   </div>
   <div class="image">
-    <img data-src="./gallery/IMG_7260.JPG" alt="" />
+    <img data-src="./gallery/IMG_6945.jpg" alt="" />
+  </div>
+  <div class="image">
+    <img data-src="./gallery/IMG_6946.jpg" alt="" />
+  </div>
+  <div class="image">
+    <img data-src="./gallery/IMG_6947.jpg" alt="" />
+  </div>
+
+  <div class="image">
+    <img data-src="./gallery/IMG_6973.jpg" alt="" />
+  </div>
+  <div class="image">
+    <img data-src="./gallery/IMG_6982.jpg" alt="" />
+  </div>
+  <div class="image">
+    <img data-src="./gallery/IMG_6985.jpg" alt="" />
+  </div>
+  <div class="image">
+    <img data-src="./gallery/IMG_7005.jpg" alt="" />
+  </div>
+  <div class="image">
+    <img data-src="./gallery/IMG_7007.jpg" alt="" />
+  </div>
+  <div class="image">
+    <img data-src="./gallery/IMG_7065.jpg" alt="" />
+  </div>
+
+  <div class="image">
+    <img data-src="./gallery/IMG_7069.jpg" alt="" />
+  </div>
+  <div class="image">
+    <img data-src="./gallery/IMG_7080.jpg" alt="" />
+  </div>
+  <div class="image">
+    <img data-src="./gallery/IMG_7151.jpg" alt="" />
+  </div>
+  <div class="image">
+    <img data-src="./gallery/IMG_7260.jpg" alt="" />
   </div>
   <div class="image">
     <img data-src="./gallery/IMG-20171214-WA0029.jpg" alt="" />

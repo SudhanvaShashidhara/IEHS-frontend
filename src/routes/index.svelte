@@ -2,6 +2,10 @@
   section.hero-image {
     position: relative;
   }
+
+  .hero-image img {
+    min-height: 180px;
+  }
   img {
     width: 100%;
   }
@@ -91,8 +95,17 @@
     }
 
     .o-card {
-      min-width: 30rem;
-      max-width: 35rem;
+      width: 40%;
+    }
+
+    .o-card img {
+      height: 14rem;
+    }
+  }
+
+  @media only screen and (min-width: 1024px) {
+    .hero-image img {
+      min-height: 580px;
     }
   }
 </style>

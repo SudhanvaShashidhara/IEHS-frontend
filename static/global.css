@@ -29,6 +29,10 @@ a {
 ul {
   list-style: none;
 }
+
+#recaptcha-hook > div {
+  margin: auto;
+}
 @media (min-width: 480px) {
   main {
     font-size: 1.2rem;
@@ -40,5 +44,18 @@ ul {
   h5,
   h6 {
     font-size: 1.5rem;
+  }
+}
+@media (min-width: 1024px) {
+  main {
+    font-size: 1.4rem;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-size: 1.7rem;
   }
 }

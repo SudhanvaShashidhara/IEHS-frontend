@@ -2,47 +2,84 @@
   import { onMount } from "svelte";
   let name = "",
     email = "",
-    message = "";
+    message = "",
+    phone = "";
 
   onMount(() => {
+    window.initRecaptcha = function() {
+      console.log("Rendering recaptcha");
+      grecaptcha.render("recaptcha-hook", {
+        sitekey: "6Le2f8wUAAAAABOGvYnK8gWd5lF1J3gwhrxJ1-BX"
+      });
+    };
+
     window.initMap = () => {
-      // The location of IEHS
       const iehsLocation = { lat: 13.054001, lng: 77.514559 };
-      // The map, centered at Uluru
       const map = new google.maps.Map(document.getElementById("map-section"), {
         zoom: 15,
         center: iehsLocation
       });
-      // The marker, positioned at IEHS
       const marker = new google.maps.Marker({
         position: iehsLocation,
         map: map
       });
     };
+
     if (typeof google !== "object") {
       const mapScript = document.createElement("script");
       mapScript.src =
         "https://maps.googleapis.com/maps/api/js?key=AIzaSyAm1A8X28plRsq_RJXKlca-beiv_Qq1pEw&callback=initMap";
       mapScript.async = true;
       mapScript.defer = true;
+
       document.body.appendChild(mapScript);
     } else {
       window.initMap();
+    }
+    if (typeof grecaptcha !== "object") {
+      const recaptchaScript = document.createElement("script");
+      recaptchaScript.src =
+        "https://www.google.com/recaptcha/api.js?onload=initRecaptcha&render=explicit";
+      recaptchaScript.async = true;
+      recaptchaScript.defer = true;
+      document.body.appendChild(recaptchaScript);
+    } else if (document.querySelector('iframe[title="recaptcha challenge"]')) {
+      let elemToRemove = document.querySelector(
+        'iframe[title="recaptcha challenge"]'
+      ).parentElement.parentElement;
+      elemToRemove.parentNode.removeChild(elemToRemove);
+      window.initRecaptcha();
     }
   });
 
   function handleContactFormSubmit(event) {
     event.preventDefault();
-    console.log("Form Submitted");
-    console.log("Name", name);
-    console.log("Email", email);
-    console.log("Message", message);
+    const dataForServer = {};
+
+    const formData = new FormData(this);
+    for (const field of formData) {
+      dataForServer[field[0]] = field[1];
+    }
+    fetch(
+      "https://asia-east2-iehs-dev.cloudfunctions.net/contactFormEndPoint/contact-form",
+      {
+        headers: {
+          "Content-Type": "application/json"
+        },
+        method: "POST",
+        body: JSON.stringify(dataForServer)
+      }
+    )
+      .then(res => res.json())
+      .then(jsonRes => {
+        // Call a func to do something
+        console.log(jsonRes);
+      });
   }
 </script>
 
 <style>
   #contact-section {
-    /* padding: 2rem 0.5rem; */
     width: 100%;
   }
 
@@ -165,6 +202,10 @@
     background-color: var(--main-color-variant);
   }
 
+  #recaptcha-hook {
+    height: 5rem;
+  }
+
   @media only screen and (min-width: 1024px) {
     #contact-section {
       display: flex;
@@ -206,7 +247,27 @@
 
       <div class="input-container">
         <label class={name ? 'shrink' : ''} for="name">Name</label>
-        <input required bind:value={name} type="text" id="name" />
+        <input required bind:value={name} type="text" id="name" name="name" />
+      </div>
+    </div>
+
+    <div class="form-control">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 512 512"
+        class="svelte-c8tyih">
+        <path
+          d="M497.39 361.8l-112-48a24 24 0 0 0-28 6.9l-49.6 60.6A370.66 370.66 0
+          0 1 130.6 204.11l60.6-49.6a23.94 23.94 0 0 0 6.9-28l-48-112A24.16
+          24.16 0 0 0 122.6.61l-104 24A24 24 0 0 0 0 48c0 256.5 207.9 464 464
+          464a24 24 0 0 0 23.4-18.6l24-104a24.29 24.29 0 0 0-14.01-27.6z" />
+      </svg>
+
+      <div class="input-container">
+        <label class={phone ? 'shrink' : ''} for="phone">
+          Phone (optional)
+        </label>
+        <input bind:value={phone} type="text" id="phone" name="phone" />
       </div>
     </div>
 
@@ -221,7 +282,12 @@
       </svg>
       <div class="input-container">
         <label class={email ? 'shrink' : ''} for="email">E Mail</label>
-        <input required bind:value={email} type="email" id="email" />
+        <input
+          required
+          bind:value={email}
+          type="email"
+          id="email"
+          name="email" />
       </div>
     </div>
 
@@ -236,11 +302,12 @@
           1.83 3.75 3.75 1.83-1.83z" />
       </svg>
       <div class="input-container">
-
         <label class={message ? 'shrink' : ''} for="message">Message</label>
-        <textarea bind:value={message} id="message" />
+        <textarea bind:value={message} id="message" name="message" />
       </div>
     </div>
+
+    <div class="form-control" id="recaptcha-hook" />
 
     <div class="form-control">
       <button type="submit" aria-label="Submit Form">Submit</button>
