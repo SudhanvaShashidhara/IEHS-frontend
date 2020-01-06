@@ -1,16 +1,26 @@
 <script>
+  import Loader from "../components/Loader.svelte";
   import { onMount } from "svelte";
   let name = "",
     email = "",
     message = "",
-    phone = "";
+    phone = "",
+    isLoading = false,
+    formMessage = "",
+    showErrorMsg = false,
+    formSubmittedInSession = false,
+    showSuccessMessage = false;
 
   onMount(() => {
+    if (sessionStorage.getItem("formSubmitted") === "true") {
+      formSubmittedInSession = true;
+    }
     window.initRecaptcha = function() {
-      console.log("Rendering recaptcha");
-      grecaptcha.render("recaptcha-hook", {
-        sitekey: "6Le2f8wUAAAAABOGvYnK8gWd5lF1J3gwhrxJ1-BX"
-      });
+      if (document.querySelector("#recaptcha-hook")) {
+        grecaptcha.render("recaptcha-hook", {
+          sitekey: "6Le2f8wUAAAAABOGvYnK8gWd5lF1J3gwhrxJ1-BX"
+        });
+      }
     };
 
     window.initMap = () => {
@@ -48,12 +58,15 @@
         'iframe[title="recaptcha challenge"]'
       ).parentElement.parentElement;
       elemToRemove.parentNode.removeChild(elemToRemove);
-      window.initRecaptcha();
+      if (document.querySelector("#recaptcha-hook")) {
+        window.initRecaptcha();
+      }
     }
   });
 
   function handleContactFormSubmit(event) {
     event.preventDefault();
+    isLoading = true;
     const dataForServer = {};
 
     const formData = new FormData(this);
@@ -72,13 +85,39 @@
     )
       .then(res => res.json())
       .then(jsonRes => {
-        // Call a func to do something
-        console.log(jsonRes);
+        name = "";
+        email = "";
+        message = "";
+        phone = "";
+        isLoading = false;
+        formMessage = jsonRes.message;
+        if (jsonRes.success) {
+          showSuccessMessage = true;
+          sessionStorage.setItem("formSubmitted", "true");
+        } else {
+          showErrorMsg = true;
+          formStatus = "red";
+          setTimeout(() => (showErrorMsg = false), 4000);
+        }
       });
   }
 </script>
 
 <style>
+  .form-success-message {
+    background-color: green;
+    color: #fff;
+    margin: 2rem;
+    padding: 1rem;
+    border-radius: 0.2rem;
+  }
+  .form-error-message {
+    background-color: red;
+    color: #fff;
+    margin: 2rem;
+    padding: 1rem;
+    border-radius: 0.2rem;
+  }
   #contact-section {
     width: 100%;
   }
@@ -234,85 +273,94 @@
 <section id="map-section" />
 
 <section id="contact-section">
-  <form on:submit={handleContactFormSubmit} class="contact-form">
-    <div class="form-control">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 24 24"
-        class={`svelte-c8tyih ${name ? 'active' : ''}`}>
-        <path
-          d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0
-          2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
-      </svg>
+  {#if isLoading}
+    <Loader />
+  {:else if formSubmittedInSession || showSuccessMessage}
+    <div class="form-success-message">Form submitted successfully.</div>
+  {:else if showErrorMsg}
+    <div class="form-error-message">{formMessage}</div>
+  {:else}
+    <form on:submit={handleContactFormSubmit} class="contact-form">
+      <div class="form-control">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          class={`svelte-c8tyih ${name ? 'active' : ''}`}>
+          <path
+            d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0
+            2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+        </svg>
 
-      <div class="input-container">
-        <label class={name ? 'shrink' : ''} for="name">Name</label>
-        <input required bind:value={name} type="text" id="name" name="name" />
+        <div class="input-container">
+          <label class={name ? 'shrink' : ''} for="name">Name</label>
+          <input required bind:value={name} type="text" id="name" name="name" />
+        </div>
       </div>
-    </div>
 
-    <div class="form-control">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 512 512"
-        class="svelte-c8tyih">
-        <path
-          d="M497.39 361.8l-112-48a24 24 0 0 0-28 6.9l-49.6 60.6A370.66 370.66 0
-          0 1 130.6 204.11l60.6-49.6a23.94 23.94 0 0 0 6.9-28l-48-112A24.16
-          24.16 0 0 0 122.6.61l-104 24A24 24 0 0 0 0 48c0 256.5 207.9 464 464
-          464a24 24 0 0 0 23.4-18.6l24-104a24.29 24.29 0 0 0-14.01-27.6z" />
-      </svg>
+      <div class="form-control">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 512 512"
+          class="svelte-c8tyih">
+          <path
+            d="M497.39 361.8l-112-48a24 24 0 0 0-28 6.9l-49.6 60.6A370.66 370.66
+            0 0 1 130.6 204.11l60.6-49.6a23.94 23.94 0 0 0 6.9-28l-48-112A24.16
+            24.16 0 0 0 122.6.61l-104 24A24 24 0 0 0 0 48c0 256.5 207.9 464 464
+            464a24 24 0 0 0 23.4-18.6l24-104a24.29 24.29 0 0 0-14.01-27.6z" />
+        </svg>
 
-      <div class="input-container">
-        <label class={phone ? 'shrink' : ''} for="phone">
-          Phone (optional)
-        </label>
-        <input bind:value={phone} type="text" id="phone" name="phone" />
+        <div class="input-container">
+          <label class={phone ? 'shrink' : ''} for="phone">
+            Phone (optional)
+          </label>
+          <input bind:value={phone} type="text" id="phone" name="phone" />
+        </div>
       </div>
-    </div>
 
-    <div class="form-control">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 24 24"
-        class={`svelte-c8tyih ${email ? 'active' : ''}`}>
-        <path
-          d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9
-          2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
-      </svg>
-      <div class="input-container">
-        <label class={email ? 'shrink' : ''} for="email">E Mail</label>
-        <input
-          required
-          bind:value={email}
-          type="email"
-          id="email"
-          name="email" />
+      <div class="form-control">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          class={`svelte-c8tyih ${email ? 'active' : ''}`}>
+          <path
+            d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9
+            2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
+        </svg>
+        <div class="input-container">
+          <label class={email ? 'shrink' : ''} for="email">E Mail</label>
+          <input
+            required
+            bind:value={email}
+            type="email"
+            id="email"
+            name="email" />
+        </div>
       </div>
-    </div>
 
-    <div class="form-control">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 24 24"
-        class={`svelte-c8tyih ${message ? 'active' : ''}`}>
-        <path
-          d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71
-          7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83
-          1.83 3.75 3.75 1.83-1.83z" />
-      </svg>
-      <div class="input-container">
-        <label class={message ? 'shrink' : ''} for="message">Message</label>
-        <textarea bind:value={message} id="message" name="message" />
+      <div class="form-control">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          class={`svelte-c8tyih ${message ? 'active' : ''}`}>
+          <path
+            d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71
+            7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41
+            0l-1.83 1.83 3.75 3.75 1.83-1.83z" />
+        </svg>
+        <div class="input-container">
+          <label class={message ? 'shrink' : ''} for="message">Message</label>
+          <textarea bind:value={message} id="message" name="message" />
+        </div>
       </div>
-    </div>
 
-    <div class="form-control" id="recaptcha-hook" />
+      <div class="form-control" id="recaptcha-hook" />
 
-    <div class="form-control">
-      <button type="submit" aria-label="Submit Form">Submit</button>
-    </div>
-  </form>
+      <div class="form-control">
+        <button type="submit" aria-label="Submit Form">Submit</button>
+      </div>
+    </form>
+  {/if}
+
   <div class="contact-info">
     <div class="address">
       <h5 class="title">Address :</h5>

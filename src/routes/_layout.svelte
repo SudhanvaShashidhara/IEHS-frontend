@@ -7,7 +7,6 @@
 
 <style>
   main {
-    /* position: relative; */
     background-color: white;
   }
 </style>
