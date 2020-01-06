@@ -249,10 +249,15 @@
     #contact-section {
       display: flex;
       border-bottom: 2px solid var(--main-color-variant);
+      align-items: center;
     }
 
     .contact-form {
       border-right: 2px solid var(--main-color-variant);
+    }
+
+    .contact-info {
+      border-bottom: none;
     }
 
     .contact-form,
@@ -262,6 +267,20 @@
 
     #map-section {
       height: 55vh;
+    }
+
+    .form-success-message {
+      width: 95%;
+      text-align: center;
+      padding: 1rem;
+    }
+    .form-error-message {
+      width: 95%;
+      text-align: center;
+      padding: 1rem;
+    }
+    .loader-holder {
+      width: 95%;
     }
   }
 </style>
@@ -274,7 +293,9 @@
 
 <section id="contact-section">
   {#if isLoading}
-    <Loader />
+    <div class="loader-holder">
+      <Loader />
+    </div>
   {:else if formSubmittedInSession || showSuccessMessage}
     <div class="form-success-message">Form submitted successfully.</div>
   {:else if showErrorMsg}
