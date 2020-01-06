@@ -1,5 +1,6 @@
 <script>
   import Loader from "../components/Loader.svelte";
+  import MAPS_API_KEY from "../api.js";
   import { onMount } from "svelte";
   let name = "",
     email = "",
@@ -37,8 +38,7 @@
 
     if (typeof google !== "object") {
       const mapScript = document.createElement("script");
-      mapScript.src =
-        "https://maps.googleapis.com/maps/api/js?key=AIzaSyAm1A8X28plRsq_RJXKlca-beiv_Qq1pEw&callback=initMap";
+      mapScript.src = `https://maps.googleapis.com/maps/api/js?key=${MAPS_API_KEY}&callback=initMap`;
       mapScript.async = true;
       mapScript.defer = true;
 
@@ -322,7 +322,7 @@
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 512 512"
-          class="svelte-c8tyih">
+          class={`svelte-c8tyih ${phone ? 'active' : ''}`}>
           <path
             d="M497.39 361.8l-112-48a24 24 0 0 0-28 6.9l-49.6 60.6A370.66 370.66
             0 0 1 130.6 204.11l60.6-49.6a23.94 23.94 0 0 0 6.9-28l-48-112A24.16
