@@ -1,3 +1,30 @@
+<script>
+  import Slider from "../components/Slider.svelte";
+  const sliderData = [
+    {
+      imageUrl: "./Home-hero.jpg",
+      cardTitle: "Slider 1",
+      cardText:
+        "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptatem sequi reprehenderit ipsam reiciendis repellat dolorem.",
+      ctaText: "CLICK ME1"
+    },
+    {
+      imageUrl: "./Home-hero.jpg",
+      cardTitle: "Slider 2",
+      cardText:
+        "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptatem sequi reprehenderit ipsam reiciendis repellat dolorem.",
+      ctaText: "CLICK ME2"
+    },
+    {
+      imageUrl: "./Home-hero.jpg",
+      cardTitle: "Slider 3",
+      cardText:
+        "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptatem sequi reprehenderit ipsam reiciendis repellat dolorem.",
+      ctaText: "CLICK ME3"
+    }
+  ];
+</script>
+
 <style>
   section.hero-image {
     position: relative;
@@ -115,13 +142,15 @@
 </svelte:head>
 
 <main>
-  <section class="hero-image">
+  <!-- <section class="hero-image">
     <img src="./Home-hero.jpg" alt="Home Page" />
     <div class="content-box">
       <h3>Preparing & Nurturing</h3>
       <p>Global Citizens of the future</p>
     </div>
-  </section>
+  </section> -->
+
+  <Slider {sliderData} delay={5000} auto={true} />
 
   <section class="o-container">
     <div class="o-wrapper">

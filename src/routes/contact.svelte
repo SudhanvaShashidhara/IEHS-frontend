@@ -172,19 +172,22 @@
   .input-container {
     width: 100%;
     position: relative;
+    height: 2rem;
   }
 
   .input-container label {
     position: absolute;
     z-index: 2;
-    transition: all 0.3s ease-in;
+    font-size: 1.4rem;
+    padding-left: 0.6rem;
+    transition: all 250ms ease;
   }
 
-  label.shrink {
+  .shrink {
     color: var(--main-color);
     top: -1.4rem;
-    left: -0.3rem;
-    font-size: 1rem;
+    left: -1.2rem;
+    transform: scale(0.6);
   }
 
   .input-container input,
@@ -201,7 +204,7 @@
   textarea {
     outline: none;
     border: none;
-    padding: 0;
+    padding: 0.5rem;
     border-bottom: 1px solid red;
   }
 
@@ -254,6 +257,15 @@
 
     .contact-form {
       border-right: 2px solid var(--main-color-variant);
+    }
+
+    .shrink {
+      transform: scale(0.7);
+    }
+
+    #contact-section {
+      border-bottom: none;
+      margin: 2rem auto;
     }
 
     .contact-info {
@@ -313,7 +325,7 @@
         </svg>
 
         <div class="input-container">
-          <label class={name ? 'shrink' : ''} for="name">Name</label>
+          <label class={name.length > 0 ? 'shrink' : ''} for="name">Name</label>
           <input required bind:value={name} type="text" id="name" name="name" />
         </div>
       </div>
@@ -331,8 +343,8 @@
         </svg>
 
         <div class="input-container">
-          <label class={phone ? 'shrink' : ''} for="phone">
-            Phone (optional)
+          <label class={phone.length > 0 ? 'shrink' : ''} for="phone">
+            Phone
           </label>
           <input bind:value={phone} type="text" id="phone" name="phone" />
         </div>
@@ -348,7 +360,9 @@
             2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
         </svg>
         <div class="input-container">
-          <label class={email ? 'shrink' : ''} for="email">E Mail</label>
+          <label class={email.length > 0 ? 'shrink' : ''} for="email">
+            E Mail
+          </label>
           <input
             required
             bind:value={email}
@@ -356,8 +370,8 @@
             id="email"
             name="email" />
         </div>
-      </div>
 
+      </div>
       <div class="form-control">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -369,7 +383,9 @@
             0l-1.83 1.83 3.75 3.75 1.83-1.83z" />
         </svg>
         <div class="input-container">
-          <label class={message ? 'shrink' : ''} for="message">Message</label>
+          <label class={message.length > 0 ? 'shrink' : ''} for="message">
+            Message
+          </label>
           <textarea bind:value={message} id="message" name="message" />
         </div>
       </div>
